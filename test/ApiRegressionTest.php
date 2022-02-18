@@ -1,0 +1,25 @@
+<?php
+
+namespace Micx\Test;
+
+use PHPUnit\Framework\TestCase;
+
+class ApiRegressionTest extends TestCase
+{
+    const BASEURL = "http://localhost/v1/subscription";
+
+    public function testGetSubscriptionWithoutAuth()
+    {
+        $ret = phore_http_request(self::BASEURL . "/sub/sub123/client/client1")->send()->getBodyJson();
+        $this->assertEquals(false, isset ($ret["private"]));
+        $this->assertEquals(false, isset ($ret["clients"]["client1"]["private"]));
+    }
+
+    public function testGetSubscriptionWithAuth()
+    {
+        $ret = phore_http_request(self::BASEURL . "/sub/sub123/client/client1")->withBasicAuth("client1", "test")->send()->getBodyJson();
+        $this->assertEquals(true, isset ($ret["private"]));
+        $this->assertEquals(true, isset ($ret["clients"]["client1"]["private"]));
+    }
+
+}

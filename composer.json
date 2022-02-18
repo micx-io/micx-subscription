@@ -1,0 +1,48 @@
+{
+  "name": "micx/subscription",
+  "description": "Subscription service",
+  "license": "MIT",
+  "homepage": "https://infracamp.org/project/phore",
+  "authors": [
+    { "name": "Matthias Leuffen", "email": "m@tth.es" }
+  ],
+  "repositories": [
+  ],
+  "require": {
+    "php": ">=8.0",
+    "ext-json": "*",
+    "ext-openssl": "*",
+    "brace/core": "*",
+    "brace/dbg": "*",
+    "brace/command": "*",
+    "brace/mod-session": "*",
+    "brace/mod-cors": "*",
+    "brace/mod-body": "*",
+    "brace/mod-router": "*",
+    "brace/mod-auth-basic": "*",
+    "brace/mod-request-laminas": "*",
+    "phore/hydrator": "*",
+    "phore/http-client": "*",
+    "lack/subscription": "*"
+  },
+  "require-dev": {
+    "phore/tester": "*"
+  },
+  "suggest": {
+  },
+  "autoload": {
+    "psr-4": {
+      "Micx\\Subscription\\": "src/"
+    },
+    "files": [
+      "config.php"
+    ]
+  },
+  "autoload-dev": {
+    "psr-4": { "Phore\\Tests\\": "tests/" }
+  },
+  "minimum-stability": "dev",
+  "config": {
+    "preferred-install": "source"
+  }
+}
