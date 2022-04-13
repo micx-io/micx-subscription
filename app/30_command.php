@@ -14,6 +14,7 @@ AppLoader::extend(function (BraceApp $app) {
         $runner = new RudlGitDbClient();
         $runner->loadClientConfigFromEnv();
         $runner->syncObjects(SUBSCRIOPTION_SCOPE, DATA_PATH);
+        $runner->logOk("Synchronized");
     });
 
     // Send yesterdays report at 00:05:00 (specified by 1)
