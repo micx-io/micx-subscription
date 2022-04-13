@@ -23,7 +23,8 @@
     "brace/mod-request-laminas": "*",
     "phore/hydrator": "*",
     "phore/http-client": "*",
-    "lack/subscription": "*"
+    "lack/subscription": "*",
+    "rudl/gitdb-lib": "*"
   },
   "require-dev": {
     "phore/tester": "*"

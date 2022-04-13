@@ -1,12 +1,15 @@
 <?php
 
 define("DEV_MODE", (bool)"1");
-define("DATA_PATH", "/data");
+
 
 if (DEV_MODE === true) {
-    define("CONFIG_PATH", "/opt/demo");
+    define("DATA_PATH", "/opt/demo");
 } else {
-    define("CONFIG_PATH", "/config");
+    define("DATA_PATH", "/data");
 }
 
-
+define("RUDL_GITDB_URL", "");
+define("RUDL_GITDB_CLIENT_ID", "");
+define("RUDL_GITDB_CLIENT_SECRET", "");
+define("SUBSCRIOPTION_SCOPE", "subscriptions");

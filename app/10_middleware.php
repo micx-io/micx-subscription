@@ -4,8 +4,6 @@ namespace App;
 
 
 use Brace\Auth\Basic\AuthBasicMiddleware;
-use Brace\Auth\Basic\AuthorizationRequiredException;
-use Brace\Auth\Basic\BasicAuthToken;
 use Brace\Auth\Basic\Validator\ClientIdFileAuthValidator;
 use Brace\Body\BodyMiddleware;
 use Brace\Core\AppLoader;
@@ -29,7 +27,6 @@ AppLoader::extend(function (BraceApp $app) {
     $app->setPipe([
         new BodyMiddleware(),
         new AuthBasicMiddleware(new ClientIdFileAuthValidator(CONFIG_PATH . "/clients.yml")),
-
         new RouterEvalMiddleware(),
         new CorsMiddleware([], function (string $subscriptionId, SubscriptionManagerInterface $subscriptionManager, RouteParams $routeParams, string $origin) {
             return $subscriptionManager->getSubscriptionById($routeParams->get("subscription_id"))->isAllowedOrigin($origin);

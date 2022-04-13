@@ -30,6 +30,10 @@ AppLoader::extend(function (BraceApp $app) {
     $app->router->on("GET@/v1/subscription/sub/:subscription_id/client?/:client_id?",
         function (BraceApp $app, RouteParams $routeParams, BasicAuthToken $basicAuthToken, SubscriptionManagerInterface $subscriptionManager)
         {
+            if ($basicAuthToken->hasCredentials) {
+                if ($routeParams->get("client_id") !== $basicAuthToken->user)
+                    throw new \InvalidArgumentException("Credentials do not apply to client_id");
+            }
             $subscription = $subscriptionManager->getSubscriptionById(
                 $routeParams->get("subscription_id"),
                 $routeParams->get("client_id"),
@@ -39,16 +43,17 @@ AppLoader::extend(function (BraceApp $app) {
         }
     );
 
-    $app->router->on("GET@/v1/subscriptions/client/:client_id",
-        function(string $body, Config $config, ServerRequest $request) use ($app)
+    $app->router->on("GET@/v1/subscription/client/:client_id",
+        function(RouteParams $routeParams, ServerRequest $request, BasicAuthToken $basicAuthToken, SubscriptionManagerInterface $subscriptionManager) use ($app)
         {
-
+            $basicAuthToken->validate();
+            return $subscriptionManager->getSubscriptionsByClientId($routeParams->get("client_id"));
         }
     );
 
 
     $app->router->on("GET@/", function() {
-        return ["system" => "micx webanalytics", "status" => "ok"];
+        return ["system" => "micx subscription", "status" => "ok"];
     });
 
 });

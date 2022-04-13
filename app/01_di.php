@@ -1,6 +1,8 @@
 <?php
 namespace App;
 
+use Brace\Auth\Basic\AuthBasicMiddleware;
+use Brace\Auth\Basic\Validator\ClientIdFileAuthValidator;
 use Brace\Command\CommandModule;
 use Brace\Core\AppLoader;
 use Brace\Core\BraceApp;
@@ -23,14 +25,15 @@ AppLoader::extend(function () {
     $app->addModule(new RouterModule());
     $app->addModule(new CommandModule());
 
+
     $app->define("app", new DiValue($app));
 
     $app->define("config", new DiService(function () {
-        return phore_file(CONFIG_PATH . "/clients.yml")->get_yaml(TConfig::class);
+        return phore_file(DATA_PATH . "/clients.yml")->get_yaml(TConfig::class);
     }));
 
     $app->define("subscriptionManager", new DiService(function () {
-        return new FileSubscriptionManager(CONFIG_PATH);
+        return new FileSubscriptionManager(DATA_PATH);
     }));
 
     return $app;
