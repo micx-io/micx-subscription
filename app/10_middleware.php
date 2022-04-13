@@ -26,7 +26,7 @@ AppLoader::extend(function (BraceApp $app) {
 
     $app->setPipe([
         new BodyMiddleware(),
-        new AuthBasicMiddleware(new ClientIdFileAuthValidator(CONFIG_PATH . "/clients.yml")),
+        new AuthBasicMiddleware(new ClientIdFileAuthValidator(DATA_PATH . "/clients.yml")),
         new RouterEvalMiddleware(),
         new CorsMiddleware([], function (string $subscriptionId, SubscriptionManagerInterface $subscriptionManager, RouteParams $routeParams, string $origin) {
             return $subscriptionManager->getSubscriptionById($routeParams->get("subscription_id"))->isAllowedOrigin($origin);
