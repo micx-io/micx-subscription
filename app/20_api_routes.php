@@ -36,7 +36,6 @@ AppLoader::extend(function (BraceApp $app) {
             }
             $subscription = $subscriptionManager->getSubscriptionById(
                 $routeParams->get("subscription_id"),
-                $routeParams->get("client_id"),
                 $basicAuthToken->valid === true
             );
             return (array)$subscription;

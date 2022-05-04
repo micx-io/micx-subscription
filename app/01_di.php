@@ -9,6 +9,7 @@ use Brace\Core\BraceApp;
 use Brace\Dbg\BraceDbg;
 use Brace\Mod\Request\Zend\BraceRequestLaminasModule;
 use Brace\Router\RouterModule;
+use Brace\Router\Type\RouteParams;
 use Lack\Subscription\Manager\FileSubscriptionManager;
 use Micx\Subscription\Config\TConfig;
 use Phore\Di\Container\Producer\DiService;
@@ -32,8 +33,8 @@ AppLoader::extend(function () {
         return phore_file(DATA_PATH . "/clients.yml")->get_yaml(TConfig::class);
     }));
 
-    $app->define("subscriptionManager", new DiService(function () {
-        return new FileSubscriptionManager(DATA_PATH);
+    $app->define("subscriptionManager", new DiService(function (RouteParams $routeParams) {
+        return new FileSubscriptionManager(DATA_PATH, $routeParams->get("client_id"));
     }));
 
     return $app;
