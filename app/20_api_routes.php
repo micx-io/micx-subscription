@@ -50,7 +50,6 @@ AppLoader::extend(function (BraceApp $app) {
         }
     );
 
-
     $app->router->on("GET@/", function() {
         return ["system" => "micx subscription", "status" => "ok"];
     });
