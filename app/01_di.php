@@ -10,7 +10,9 @@ use Brace\Dbg\BraceDbg;
 use Brace\Mod\Request\Zend\BraceRequestLaminasModule;
 use Brace\Router\RouterModule;
 use Brace\Router\Type\RouteParams;
+use Lack\Subscription\Manager\CsvFileTemplateSubscriptionManager;
 use Lack\Subscription\Manager\FileSubscriptionManager;
+use Lack\Subscription\Manager\MultiSubscriptionManager;
 use Micx\Subscription\Config\TConfig;
 use Phore\Di\Container\Producer\DiService;
 use Phore\Di\Container\Producer\DiValue;
@@ -34,7 +36,12 @@ AppLoader::extend(function () {
     }));
 
     $app->define("subscriptionManager", new DiService(function (RouteParams $routeParams) {
-        return new FileSubscriptionManager(DATA_PATH, $routeParams->get("client_id"));
+        $sm = new MultiSubscriptionManager([
+            new FileSubscriptionManager(DATA_PATH),
+            new CsvFileTemplateSubscriptionManager(DATA_CSV_PATH)
+        ]);
+        $sm->setClientId($routeParams->get("client_id"));
+        return $sm;
     }));
 
     return $app;

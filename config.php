@@ -4,9 +4,11 @@ define("DEV_MODE", (bool)"1");
 
 
 if (DEV_MODE === true) {
-    define("DATA_PATH", "/opt/demo");
+    define("DATA_PATH", "/opt/demo");#
+    define("DATA_CSV_PATH", "/opt/demo/subscriptions.csv");
 } else {
     define("DATA_PATH", "/data");
+    define("DATA_CSV_PATH", "/opt/demo/subscriptions.csv");
 }
 
 define("RUDL_GITDB_URL", "");
