@@ -14,3 +14,4 @@ Subscription Manager
 | RUDL_GITDB_CLIENT_SECRET | The client secret. Can be loaded from file by prefixing: `file:/var/run/secrets/secret_name` |
 | SUBSCRIPTION_SCOPE       | The scope to look up ingress object (default: subscriptions)                                 |
 
+
