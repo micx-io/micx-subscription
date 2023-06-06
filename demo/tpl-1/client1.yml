@@ -4,3 +4,6 @@ public:
 
 private:
   private_config: abc
+  auth:
+    - "other:$6$CLb5nmP3ptB2$D.0IyAXDK3/uG.iRTSsigf9geQ4oeOuCZviOgHFVha70eVihT0iODh4g0hUD7doEradkhn//rMH0"
+    - "{{ userpasshash : string }}"

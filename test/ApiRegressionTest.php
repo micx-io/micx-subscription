@@ -45,4 +45,12 @@ class ApiRegressionTest extends TestCase
         print_r ($ret);
     }
 
+    public function testRemoteGetSubscriptionTemplate()
+    {
+        $m = new RemoteSubscriptionManager("http://localhost/v1/subscription", "client1", "test");
+        $ret = $m->getSubscriptionById("demo1");
+
+        print_r ($ret);
+    }
+
 }
